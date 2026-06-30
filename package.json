@@ -1,0 +1,56 @@
+{
+  "name": "barong",
+  "private": true,
+  "version": "0.1.0",
+  "description": "바롱이는 맥북 노치 우측에 사는 Google Calendar 업무 반려펫입니다.",
+  "author": "Barong",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:web": "vite --host 127.0.0.1",
+    "dev:app": "concurrently -k \"bun run dev:web\" \"wait-on http://127.0.0.1:5173 && VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron .\"",
+    "build": "tsc -b && vite build",
+    "build:app": "bun run build && electron-builder --mac dmg zip && bun run stage:download",
+    "build:native": "bash scripts/package-native.sh",
+    "build:release": "bun run build:native && bun run build",
+    "stage:download": "mkdir -p dist/downloads && cp dist/*.dmg dist/downloads/barong-macos.dmg",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "googleapis": "^173.0.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "concurrently": "^10.0.3",
+    "electron": "^42.5.1",
+    "electron-builder": "^26.15.3",
+    "oxlint": "^1.69.0",
+    "sharp": "^0.35.2",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.0",
+    "wait-on": "^9.0.10"
+  },
+  "build": {
+    "appId": "works.barong.desktop",
+    "productName": "바롱이",
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    }
+  }
+}
