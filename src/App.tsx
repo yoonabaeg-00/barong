@@ -259,6 +259,8 @@ function AppMode() {
 }
 
 function LandingPage() {
+  const downloadUrl = `${import.meta.env.BASE_URL}downloads/barong-notch-macos-poc.zip`
+
   return (
     <main className="landing-page">
       <section className="hero-section">
@@ -271,7 +273,7 @@ function LandingPage() {
             츄르주기로 하루를 같이 시작해요.
           </p>
           <div className="hero-actions">
-            <a href="/downloads/barong-notch-macos-poc.zip" download>
+            <a href={downloadUrl} download>
               macOS 앱 다운로드
             </a>
             <a href="#privacy" className="secondary-link">
