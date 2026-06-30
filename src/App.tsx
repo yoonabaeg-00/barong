@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import barongSpritePreview from '../얍.png'
+import barongSpritePreview from './assets/barong/barong-reference.png'
 import './App.css'
 import type { CalendarEvent, CalendarStatus } from './electron'
 
